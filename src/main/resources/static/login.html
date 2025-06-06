@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Quiz Bíblico Animado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+  
+</head>
+<body class="bg-gray-100">
+
+    <!-- Imagem de fundo animada (mesma do quiz) -->
+    <div class="background-box">
+        <!-- Substitua 'img/bg.png' pelo caminho correto da sua imagem de fundo -->
+        <img src="bg.png" alt="Fundo animado da Arca de Noé" class="background-image" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/a6bdef/ffffff?text=Fundo+Quiz';">
+    </div>
+
+    <!-- Container Principal -->
+    <div class="auth-container">
+
+        <!-- Formulário de Login (inicialmente visível) -->
+        <div id="login-form">
+            <h1 class="text-3xl font-bold text-blue-700 mb-6">Quiz Bíblico</h1>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-8">Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="mb-4">
+                    <label for="login-email" class="block text-left text-sm font-medium text-gray-700 mb-1">Email:</label>
+                    <input type="email" id="login-email" name="login-email" class="auth-input" placeholder="seuemail@exemplo.com" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-senha" class="block text-left text-sm font-medium text-gray-700 mb-1">Senha:</label>
+                    <input type="password" id="login-senha" name="login-senha" class="auth-input" placeholder="********" required>
+                </div>
+                <button type="submit" class="auth-button">Entrar</button>
+            </form>
+            <p class="mt-6 text-sm text-gray-600">
+                Não tem uma conta? <span onclick="toggleForms()" class="toggle-link">Cadastre-se aqui!</span>
+            </p>
+        </div>
+
+        <!-- Formulário de Cadastro (inicialmente oculto) -->
+        <div id="register-form" class="hidden">
+            <h1 class="text-3xl font-bold text-blue-500 mb-6">Quiz Bíblico</h1>
+            <h2 class="text-2xl font-semibold text-gray-500 mb-8">Cadastro</h2>
+            <form onsubmit="handleRegister(event)">
+                <div class="mb-4">
+                    <label for="register-nome" class="block text-left text-sm font-medium text-gray-700 mb-1">Nome Completo:</label>
+                    <input type="text" id="register-nome" name="register-nome" class="auth-input" placeholder="Seu Nome Completo" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-email" class="block text-left text-sm font-medium text-gray-700 mb-1">Email:</label>
+                    <input type="email" id="register-email" name="register-email" class="auth-input" placeholder="seuemail@exemplo.com" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-senha" class="block text-left text-sm font-medium text-gray-700 mb-1">Senha:</label>
+                    <input type="password" id="register-senha" name="register-senha" class="auth-input" placeholder="Crie uma senha forte" required>
+                </div>
+                 <!--<div class="mb-4">
+                    <label for="register-confirmar-senha" class="block text-left text-sm font-medium text-gray-700 mb-1">Confirmar Senha:</label>
+                    <input type="password" id="register-confirmar-senha" name="register-confirmar-senha" class="auth-input" placeholder="Confirme sua senha" required>
+                </div>
+            -->
+                <button type="submit" class="auth-button">Cadastrar</button>
+            </form>
+            <p class="mt-6 text-sm text-gray-600">
+                Já tem uma conta? <span onclick="toggleForms()" class="toggle-link">Faça login aqui!</span>
+            </p>
+        </div>
+
+        <!-- Área de Feedback/Mensagem (opcional) -->
+        <div id="auth-feedback" class="mt-4 text-sm"></div>
+
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const authFeedback = document.getElementById('auth-feedback');
+
+        function toggleForms() {
+            loginForm.classList.toggle('hidden');
+            registerForm.classList.toggle('hidden');
+            authFeedback.textContent = ''; // Limpa mensagens de feedback ao trocar de formulário
+        }
+
+      function handleLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const senha = document.getElementById('login-senha').value;
+
+    fetch('http://localhost:48780/api/usuarios/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha })
+    })
+    .then(res => res.text())
+    .then(msg => {
+        if (msg.includes("bem-sucedido")) {
+            // ✅ Salva os dados no localStorage
+            localStorage.setItem("usuarioLogado", JSON.stringify({ email }));
+
+            // Redireciona para o quiz
+            window.location.href = "quiz.html";
+        } else {
+            setFeedback(msg, 'error');
+        }
+    })
+    .catch(() => setFeedback('Erro na comunicação com o servidor.', 'error'));
+}
+
+       function handleRegister(event) {
+    event.preventDefault();
+    const nome = document.getElementById('register-nome').value;
+    const email = document.getElementById('register-email').value;
+    const senha = document.getElementById('register-senha').value;
+
+    fetch('http://localhost:48780/api/usuarios/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, senha })
+    })
+    .then(res => res.text())
+    .then(msg => {
+        setFeedback(msg, msg.includes("sucesso") ? 'success' : 'error');
+        if (msg.includes("sucesso")) toggleForms();
+    })
+    .catch(() => setFeedback('Erro ao registrar.', 'error'));
+}
+
+
+        function setFeedback(message, type) {
+            authFeedback.textContent = message;
+            authFeedback.className = 'mt-4 text-sm'; // Reset classes
+            if (type === 'success') {
+                authFeedback.classList.add('text-green-600');
+            } else if (type === 'error') {
+                authFeedback.classList.add('text-red-600');
+            } else if (type === 'info') {
+                authFeedback.classList.add('text-blue-600');
+            }
+        }
+    </script>
+
+</body>
+<script src="login.js"></script>
+</html>

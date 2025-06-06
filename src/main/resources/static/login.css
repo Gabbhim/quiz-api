@@ -1,0 +1,102 @@
+ 
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            /* Garante que o corpo ocupe toda a altura da viewport */
+            min-height: 100vh;
+            display: flex; /* Necessário para centralizar o conteúdo com o fundo */
+            align-items: center; /* Necessário para centralizar o conteúdo com o fundo */
+            justify-content: center; /* Necessário para centralizar o conteúdo com o fundo */
+        }
+
+        .background-box {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: pulseBackground 8s ease-in-out infinite alternate;
+            transform-origin: center center;
+        }
+
+        @keyframes pulseBackground {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Estilo para o container principal, similar ao do quiz */
+        .auth-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente para destacar o formulário */
+            border-radius: 1rem; /* 16px */
+            padding: 2rem; /* 32px */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            width: 400px;
+            max-width: 450px; /* Largura máxima do formulário */
+            text-align: center;
+        }
+
+        /* Estilização dos campos de input, similar aos botões de opção do quiz */
+        .auth-input {
+            padding: 0.75rem; /* 12px */
+            margin-bottom: 1rem; /* 16px */
+            background-color: #e5e7eb; /* gray-200 */
+            border-radius: 0.5rem; /* 8px */
+            border: 1px solid #d1d5db; /* gray-300 */
+            width: 100%;
+            font-size: 1rem; /* 16px */
+            color: #374151; /* gray-700 */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .auth-input:focus {
+            outline: none;
+            border-color: #3b82f6; /* blue-500 */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* Anel de foco azul */
+        }
+
+        /* Estilização dos botões, similar aos botões de controle do quiz */
+        .auth-button {
+            padding: 0.75rem 1.5rem; /* 12px 24px */
+            background-color: #3b82f6; /* blue-500 */
+            color: #ffffff;
+            border-radius: 0.5rem; /* 8px */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem; /* 16px */
+            font-weight: 600;
+            width: 100%;
+            border: none;
+            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+        }
+        .auth-button:hover {
+            background-color: #2563eb; /* blue-600 */
+        }
+
+        .toggle-link {
+            color: #3b82f6; /* blue-500 */
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .toggle-link:hover {
+            color: #1d4ed8; /* blue-700 */
+            text-decoration: underline;
+        }
+    

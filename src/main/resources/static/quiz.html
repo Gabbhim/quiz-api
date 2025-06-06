@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Bíblico Animado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="quizStyle.css">
+    <script>
+    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+    if (!usuario || !usuario.email) {
+        // Usuário não está logado → redireciona para login
+        window.location.href = "login.html";
+    }
+</script>
+</head>
+<body>
+  <div class="background-box">
+        <img src="bg.png" alt="Fundo animado da Arca de Noé" class="background-image">
+    </div>
+    <p id="boas-vindas" class="text-blue-700 font-bold mb-4"></p>
+    <div class="container">
+        <h1 class="text-3xl font-semibold text-blue-700 mb-4">Quiz Bíblico Animado</h1>
+        <div id="quiz-container">
+            <div class="question" id="question"></div>
+            <div class="options" id="options">
+                <button class="option" id="option1"></button>
+                <button class="option" id="option2"></button>
+                <button class="option" id="option3"></button>
+                <button class="option" id="option4"></button>
+            </div>
+            <div class="feedback" id="feedback"></div>
+            <div id="animation-container" class="hidden">
+                <div class="trophy"></div>
+            </div>
+            <button class="next-level hidden" id="next-level">Próximo Nível</button>
+            <button class="restart-quiz hidden" id="restart-quiz">Recomeçar Quiz</button>
+            <p class="text-gray-500 mt-4">Nível: <span id="level">1</span> | Pontuação: <span id="score">0</span></p>
+        </div>
+    </div>
+   
+</body>
+<script src="script.js"></script>
+</html>

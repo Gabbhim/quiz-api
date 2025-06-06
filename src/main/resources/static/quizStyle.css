@@ -1,0 +1,188 @@
+
+        body {
+            margin: 0;
+             /* Esconde as barras de rolagem para a animação de fundo */
+            font-family: 'Inter', sans-serif;
+        }
+
+        .background-box {
+            position: fixed; /* Fixa o contêiner de fundo */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Garante que a imagem não saia do contêiner */
+            z-index: -1; /* Coloca o fundo atrás do conteúdo */
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* A imagem preenche o contêiner */
+            height: 100%;
+            object-fit: cover; /* Cobre o contêiner mantendo a proporção */
+            animation: pulseBackground 8s ease-in-out infinite alternate; /* Animação de pulsação */
+            transform-origin: center center; /* Garante que a escala seja do centro */
+        }
+
+        @keyframes pulseBackground {
+            0% {
+                transform: scale(1); /* Tamanho normal */
+            }
+            50% {
+                transform: scale(1.05); /* Aumenta ligeiramente */
+            }
+            100% {
+                transform: scale(1); /* Volta ao tamanho normal */
+            }
+        }
+
+        .content {
+            position: relative; /* Conteúdo acima do fundo */
+            z-index: 1;
+            min-height: 100vh; /* Garante que o conteúdo tenha altura suficiente */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white; /* Cor do texto para contraste com o fundo */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra no texto para legibilidade */
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.3); /* Um leve overlay para o fundo */
+        }
+
+        /* Estilos responsivos para a imagem de fundo (a animação de pulsação não precisa de media queries separadas, pois escala uniformemente) */
+        
+       
+        
+        .container {
+            max-width: 500px;
+            min-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            
+        }
+        #quiz-container {
+            background-color: #a6bdef;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 1.25rem;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            margin-bottom: 1rem;
+            color: #0f1010; /* Cor do texto para perguntas (gray-900) */
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 1rem;
+        }
+        .option {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background-color: #e5e7eb; /* Cor de fundo das opções (gray-200) */
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 0.125rem solid #d1d5db; /* Cor da borda das opções (gray-300) */
+            text-align: left;
+            font-size: 1rem;
+            color: #374151; /* Cor do texto das opções (gray-800) */
+        }
+        .option:hover {
+            background-color: #afbfd7; /* Cor de fundo das opções no hover (gray-300) */
+            border-color: #9ca3af; /* Cor da borda das opções no hover (gray-400) */
+        }
+        .option.correct {
+            background-color: #f0fdf4; /* Cor de fundo da opção correta (green-100) */
+            border-color: #16a34a; /* Cor da borda da opção correta (green-500) */
+            color: #15803d; /* Cor do texto da opção correta (green-600) */
+        }
+        .option.incorrect {
+            background-color: #fef2f2; /* Cor de fundo da opção incorreta (red-100) */
+            border-color: #dc2626; /* Cor da borda da opção incorreta (red-500) */
+            color: #b91c1c; /* Cor do texto da opção incorreta (red-600) */
+        }
+        .feedback {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            min-height: 3rem; /* Garante que a mensagem de feedback tenha altura suficiente */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feedback.correct {
+            color: #16a34a; /* Cor do texto para feedback correto (green-500) */
+        }
+        .feedback.incorrect {
+            color: #dc2626; /* Cor do texto para feedback incorreto (red-500) */
+        }
+        .next-level, .restart-quiz {
+            padding: 0.75rem 1.5rem;
+            background-color: #3b82f6; /* Cor de fundo do botão (blue-500) */
+            color: #fff;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            border: none;
+            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+        }
+        .next-level:hover, .restart-quiz:hover {
+            background-color: #2563eb; /* Cor de fundo do botão no hover (blue-700) */
+        }
+        .next-level:disabled {
+            background-color: #9ca3af; /* Cor de fundo do botão desabilitado (gray-400) */
+            cursor: not-allowed;
+            opacity: 0.7;
+            box-shadow: none;
+        }
+        #animation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 4rem; /* Altura fixa para a animação */
+            margin-bottom: 1rem;
+            overflow: hidden; /* Garante que a animação não vaze do contêiner */
+        }
+        .trophy {
+            width: 3rem; /* Largura do troféu */
+            height: 3rem; /* Altura do troféu */
+            background-image: url('data:image/svg+xml,%3Csvg xmlns%3D%22http://www.w3.org/2000/svg%22 viewBox%3D%220 0 512 512%22%3E%3Cpath fill%3D%22%23ffc107%22 d%3D%22M464 128H48c-26.51 0-48 21.49-48 48v80c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-80c0-26.51-21.49-48-48-48z%22/%3E%3Cpath fill%3D%22%23ffd700%22 d%3D%22M491.51 32H19.49c-18.31 0-33.1 14.53-32.95 32.84L38.51 448c.15 17.5 14.46 31.66 32 31.16h362.98c17.54.5 31.85-13.66 32-31.16l51.47-385.16c.15-18.31-14.65-32.84-33-32.84z%22/%3E%3Cpath fill%3D%22%23ffc107%22 d%3D%22M128 192h256v64H128z%22/%3E%3C/svg%3E'); /* URL do SVG do troféu (amarelo) */
+            background-size: cover;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .confetti {
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: #facc15; /* Cor do confete (yellow-400) */
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: confettiFall 3s forwards, confettiSpin 2s infinite;
+        }
+        @keyframes confettiFall {
+            to {
+                transform: translateY(800px);
+                opacity: 1;
+            }
+        }
+        @keyframes confettiSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    
