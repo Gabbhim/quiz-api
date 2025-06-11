@@ -17,7 +17,7 @@ public class UsuarioController {
     @PostMapping("/register")
     public Mono<String> register(@RequestBody Usuario usuario) {
         return usuarioRepository.findByEmail(usuario.getEmail())
-                .flatMap(existing -> Mono.just("Email já cadastrado!"))
+                .flatMap(ignored -> Mono.just("Email já cadastrado!"))
                 .switchIfEmpty(usuarioRepository.save(usuario).thenReturn("Cadastro realizado com sucesso!"));
     }
 

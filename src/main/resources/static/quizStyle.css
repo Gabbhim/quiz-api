@@ -62,6 +62,9 @@
             margin: 0 auto;
             padding: 2rem;
             text-align: center;
+            display: grid;
+            place-items: center; /* Centers both horizontally and vertically */
+            min-height: 100vh;
             
         }
         #quiz-container {
@@ -70,6 +73,11 @@
             padding: 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+            height: 550px;
+            min-width: 400px;
+            max-width: 450px;
+
         }
         .question {
             font-size: 1.25rem;
@@ -145,25 +153,36 @@
             opacity: 0.7;
             box-shadow: none;
         }
-        #animation-container {
+        /*#animation-container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 4rem; /* Altura fixa para a animação */
-            margin-bottom: 1rem;
+           /*margin-bottom: 1rem;
             overflow: hidden; /* Garante que a animação não vaze do contêiner */
-        }
+        /*}
         .trophy {
             width: 3rem; /* Largura do troféu */
-            height: 3rem; /* Altura do troféu */
-            background-image: url('data:image/svg+xml,%3Csvg xmlns%3D%22http://www.w3.org/2000/svg%22 viewBox%3D%220 0 512 512%22%3E%3Cpath fill%3D%22%23ffc107%22 d%3D%22M464 128H48c-26.51 0-48 21.49-48 48v80c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-80c0-26.51-21.49-48-48-48z%22/%3E%3Cpath fill%3D%22%23ffd700%22 d%3D%22M491.51 32H19.49c-18.31 0-33.1 14.53-32.95 32.84L38.51 448c.15 17.5 14.46 31.66 32 31.16h362.98c17.54.5 31.85-13.66 32-31.16l51.47-385.16c.15-18.31-14.65-32.84-33-32.84z%22/%3E%3Cpath fill%3D%22%23ffc107%22 d%3D%22M128 192h256v64H128z%22/%3E%3C/svg%3E'); /* URL do SVG do troféu (amarelo) */
-            background-size: cover;
+           /* height: 3rem; /* Altura do troféu */
+          /*  background-image: url('data:image/svg+xml,%3Csvg xmlns%3D%22http://www.w3.org/2000/svg%22 viewBox%3D%220 0 512 512%22%3E%3Cpath fill%3D%22%23ffc107%22 d%3D%22M464 128H48c-26.51 0-48 21.49-48 48v80c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48v-80c0-26.51-21.49-48-48-48z%22/%3E%3Cpath fill%3D%22%23ffd700%22 d%3D%22M491.51 32H19.49c-18.31 0-33.1 14.53-32.95 32.84L38.51 448c.15 17.5 14.46 31.66 32 31.16h362.98c17.54.5 31.85-13.66 32-31.16l51.47-385.16c.15-18.31-14.65-32.84-33-32.84z%22/%3E%3Cpath fill%3D%22%23ffc107%22 d%3D%22M128 192h256v64H128z%22/%3E%3C/svg%3E'); /* URL do SVG do troféu (amarelo) */
+            /* background-size: cover;
             animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
+        }*/
+        /*@keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
+        }*/
+        #scori{
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display:flex;
+            justify-content: space-around
+            ;
+            }
+        #scori span {
+            color: #303135; /* Cor do texto para o número de acertos (blue-500) */
         }
         .confetti {
             width: 0.5rem;

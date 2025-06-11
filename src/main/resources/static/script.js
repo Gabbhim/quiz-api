@@ -615,8 +615,10 @@
 
         let currentLevel = 1;
         let score = 0;
-        let currentQuestions = [];
         let correctAnswersCount = 0;
+        let wrongAnswersCount = 0;
+        let currentQuestions = [];
+        let initialLevelQuestionsCount = 0;
 
         const questionElement = document.getElementById("question");
         const optionsElement = document.getElementById("options");
@@ -625,7 +627,9 @@
         const restartQuizButton = document.getElementById("restart-quiz");
         const levelElement = document.getElementById("level");
         const scoreElement = document.getElementById("score");
-        const animationContainer = document.getElementById("animation-container");
+        const acertosElement = document.getElementById("acertos");
+        const errosElement = document.getElementById("erros");
+        //const animationContainer = document.getElementById("animation-container");
 
         nextLevelButton.addEventListener("click", nextLevel);
         restartQuizButton.addEventListener("click", startQuiz);
@@ -652,12 +656,15 @@
             currentQuestions = selectQuestionsForLevel(currentLevel);
             levelElement.textContent = currentLevel;
             scoreElement.textContent = score;
+            acertosElement.textContent = correctAnswersCount;
+            errosElement.textContent = wrongAnswersCount;
+
             questionElement.classList.remove("text-red-500", "text-green-500");
             feedbackElement.classList.remove("correct", "incorrect");
             feedbackElement.textContent = "";
             nextLevelButton.classList.add("hidden");
             restartQuizButton.classList.add("hidden");
-            animationContainer.classList.add("hidden");
+            //animationContainer.classList.add("hidden");
             loadQuestion();
         }
 
@@ -692,24 +699,28 @@
                 scoreElement.textContent = score;
                 feedbackElement.textContent = "Resposta Correta!";
                 feedbackElement.classList.add("correct");
+                feedbackElement.style.color = "green";
             } else {
+                wrongAnswersCount++;
                 feedbackElement.textContent = "Resposta Incorreta!";
                 feedbackElement.classList.add("incorrect");
+                feedbackElement.style.color = "red";  
             }
-
+              acertosElement.textContent = correctAnswersCount;
+              errosElement.textContent = wrongAnswersCount;
             if (currentQuestions.length === 0) {
                 if (correctAnswersCount >= 7) {
                     if (currentLevel < 10) {
                         feedbackElement.textContent = "Parabéns! Nível Concluído!";
                         feedbackElement.classList.remove("incorrect");
                         feedbackElement.classList.add("correct");
-                        animationContainer.classList.remove("hidden");
+                       // animationContainer.classList.remove("hidden");
                         nextLevelButton.classList.remove("hidden");
                     } else {
                         feedbackElement.textContent = "Parabéns! Você Concluiu o Quiz Bíblico!";
                         feedbackElement.classList.remove("incorrect");
                         feedbackElement.classList.add("correct");
-                        animationContainer.classList.remove("hidden");
+                        //animationContainer.classList.remove("hidden");
                         restartQuizButton.classList.remove("hidden");
                     }
                 } else {
@@ -719,7 +730,7 @@
                     restartQuizButton.classList.remove("hidden");
                 }
             } else {
-                setTimeout(loadQuestion, 1500);
+                setTimeout(loadQuestion, 3500);
             }
         }
 
@@ -732,7 +743,7 @@
             feedbackElement.classList.remove("correct", "incorrect");
             feedbackElement.textContent = "";
             nextLevelButton.classList.add("hidden");
-            animationContainer.classList.add("hidden");
+            //animationContainer.classList.remove("hidden");
             loadQuestion();
         }
 
